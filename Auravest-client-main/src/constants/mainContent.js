@@ -20,8 +20,10 @@ export const backendConfig = {
   // base: "https://q0vn1d1k-6095.inc1.devtunnels.ms/api",
   // origin: "https://q0vn1d1k-6095.inc1.devtunnels.ms/",
 
-  base: "http://localhost:8024/api",
-  origin: "http://localhost:8024",
+  base: "https://nexachain-task1-1.onrender.com/api",
+  origin: "https://nexachain-task1-1.onrender.com",
+  // base: "http://localhost:8024/api",
+  // origin: "http://localhost:8024",
   // base: "https://api.auravest.world/api",
   // origin: "https://api.auravest.world/",
   // base: "https://api.rbncropscience.in/api",
