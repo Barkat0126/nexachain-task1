@@ -1,12 +1,26 @@
 const ImageKit = require("imagekit");
 const { v4: uuid } = require("uuid");
 
-const imagekit = new ImageKit({
-    publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
-    privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
-    urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT
-});
+let imagekit;
+try {
+    if (process.env.IMAGEKIT_PUBLIC_KEY && process.env.IMAGEKIT_PRIVATE_KEY && process.env.IMAGEKIT_URL_ENDPOINT) {
+        imagekit = new ImageKit({
+            publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+            privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+            urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT
+        });
+    } else {
+        console.warn("ImageKit credentials missing. Uploads will fail.");
+    }
+} catch (error) {
+    console.warn("Failed to initialize ImageKit:", error.message);
+}
+
 module.exports.uploadToImageKit = async (file, folder) => {
+    if (!imagekit) {
+        console.error("ImageKit not initialized");
+        return null;
+    }
     try {
         if (!file) return null;
 
